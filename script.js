@@ -143,7 +143,7 @@ const saveImage = () => {
     ctx.rotate((rotate * Math.PI) / 180);
   }
   ctx.scale(flipHorizontal, flipVertical);
-  ctx.filter = `brightness(${brightness}%) saturate(${saturation}%) grayscale(${grayscale}%) invert(${inversion}%)`;
+  ctx.filter = `brightness(${brightness}%) saturate(${saturation}%) grayscale(${grayscale}%) invert(${inversion}%) contrast(${contrast}%) blur(${blur}px) opacity(${opacity}%) sepia(${sepia}%) `;
   ctx.drawImage(
     previewBtn,
     -canvas.width / 2,
