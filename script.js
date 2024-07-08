@@ -12,14 +12,18 @@ const fileInput = document.querySelector(".file-input"),
 let brightness = 100,
   saturation = 100,
   grayscale = 0,
-  inversion = 0;
+  inversion = 0,
+  contrast = 100,
+  blur = 0,
+  opacity = 100,
+  sepia = 0;
 let rotate = 0,
   flipHorizontal = 1,
   flipVertical = 1;
 
 const applyFilters = () => {
   previewBtn.style.transform = `rotate(${rotate}deg) scale(${flipHorizontal} , ${flipVertical})`;
-  previewBtn.style.filter = `brightness(${brightness}%) saturate(${saturation}%) grayscale(${grayscale}%) invert(${inversion}%)`;
+   previewBtn.style.filter = `brightness(${brightness}%) saturate(${saturation}%) grayscale(${grayscale}%) invert(${inversion}%) contrast(${contrast}%) blur(${blur}px) opacity(${opacity}%) sepia(${sepia}%) `;
 };
 
 const loadImage = () => {
@@ -36,8 +40,7 @@ filterOptions.forEach((option) => {
     document.querySelector(".filter .active").classList.remove("active");
     option.classList.add("active");
     filterName.innerText = option.innerText;
-
-    if (option.id === "brightness") {
+if (option.id === "brightness") {
       filterSlider.max = "200";
       filterSlider.value = brightness;
       filterValue.innerText = `${brightness}%`;
@@ -49,6 +52,22 @@ filterOptions.forEach((option) => {
       filterSlider.max = "100";
       filterSlider.value = inversion;
       filterValue.innerText = `${inversion}%`;
+    } else if (option.id === "contrast") {
+      filterSlider.max = "200";
+      filterSlider.value = contrast;
+      filterValue.innerText = `${contrast}%`;
+    } else if (option.id === "blur") {
+      filterSlider.max = "50";
+      filterSlider.value = blur;
+      filterValue.innerText = `${blur}%`;
+    } else if (option.id === "opacity") {
+      filterSlider.max = "100";
+      filterSlider.value = opacity;
+      filterValue.innerText = `${opacity}%`;
+    } else if (option.id === "sepia") {
+      filterSlider.max = "100";
+      filterSlider.value = sepia;
+      filterValue.innerText = `${sepia}%`;
     } else {
       filterSlider.max = "100";
       filterSlider.value = grayscale;
@@ -66,11 +85,21 @@ const updateFilter = () => {
     saturation = filterSlider.value;
   } else if (selectedFilter.id === "inversion") {
     inversion = filterSlider.value;
+  } else if (selectedFilter.id === "contrast") {
+    contrast = filterSlider.value;
+  } else if (selectedFilter.id === "blur") {
+    blur = filterSlider.value;
+  } else if (selectedFilter.id === "opacity") {
+    opacity = filterSlider.value;
+  } else if (selectedFilter.id === "sepia") {
+    sepia = filterSlider.value;
   } else {
     grayscale = filterSlider.value;
   }
   applyFilters();
 };
+   
+
 
 rotateOptions.forEach((option) => {
   option.addEventListener("click", () => {
@@ -93,6 +122,10 @@ const resetFilter = () => {
   saturation = 100;
   grayscale = 0;
   inversion = 0;
+  contrast = 100;
+  blur = 0;
+  opacity = 100;
+  sepia = 0;
   rotate = 0;
   flipHorizontal = 1;
   flipVertical = 1;
